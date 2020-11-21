@@ -48,15 +48,15 @@ class GamePlayer:
         min_move = Move.Move(1000)
         for child in children:
             move = self.g_max(child, depth+1)
-            if move.get_val() <= min_move.get_val():
-                if move.get_val() == min_move.get_val():
+            if board.valid_move(move.get_row(), move.get_col())*-1 <= board.valid_move(min_move.get_row(), min_move.get_col())*-1:
+                if board.valid_move(move.get_row(), move.get_col())*-1 == board.valid_move(min_move.get_row(), min_move.get_col())*-1:
                     if random.randint(0, 1) == 0:
                         min_move.set_row(child.get_last_move().get_row())
                         min_move.set_col(child.get_last_move().get_col())
-                        min_move.set_val(move.get_val())
+                        #min_move.set_val(move.get_val())
                 else:
                     min_move.set_row(child.get_last_move().get_row())
                     min_move.set_col(child.get_last_move().get_col())
-                    min_move.set_val(move.get_val())
+                    #min_move.set_val(move.get_val())
         return min_move
 
