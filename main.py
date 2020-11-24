@@ -2,12 +2,13 @@ import GamePlayer
 import Board
 import Move
 
-
+#defining minimax depth, anything above a 7 is not advisable :)
 depth = input("Choose the depth for the minimax algorithm: ")
 B_player = GamePlayer.GamePlayer(int(depth), 1)
 W_player = GamePlayer.GamePlayer(int(depth), -1)
 board = Board.Board()
 
+#player is always black
 ans = input("Player Gets Black, do you want to play first? (y/any other key): ")
 if ans == 'y':
     board.set_last_colour(-1)
@@ -18,6 +19,7 @@ board.print()
 while not board.terminal_state():
     print()
     case = board.get_last_colour()
+    #players turn to move
     if case == -1:
         print("Black Colour's Turn")
         row = input("Row in which to place piece: ")
@@ -28,6 +30,7 @@ while not board.terminal_state():
             col = input("Column in which to place piece: ")
         board.make_move(int(row), int(col), 1)
         board.set_last_colour(1)
+    #computers turn to move
     elif case == 1:
         print("White Colour's Turn")
         while True:
