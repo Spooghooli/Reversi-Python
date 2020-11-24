@@ -10,7 +10,7 @@ class Board:
         self.EMPTY = 0
         self.last_move = Move.Move()
         self.last_colour = -1
-        self.game_board = [[0 for x in range(10)]for y in range(10)]
+        self.game_board = [[0 for x in range(10)] for y in range(10)]
         self.game_board[3][3], self.game_board[3][4] = self.W, self.B
         self.game_board[4][3], self.game_board[4][4] = self.B, self.W
         if board != None:
@@ -36,13 +36,13 @@ class Board:
     def set_game_board(self, game_board):
         self.game_board = game_board
 
-    def make_move(self, row, col, colour):
+    def make_move(self, row, col, colour):  # this method is the one that makes the moves
         i: int = row
         j: int = col
         score: int = 0
 
         while self.valid_move(row, col) != 0:
-            if self.game_board[row - 1][col] == self.last_colour: #up
+            if self.game_board[row - 1][col] == self.last_colour:  # up
                 i = row
                 j = 0
                 while self.game_board[i - 1][col] == self.last_colour:
@@ -53,7 +53,7 @@ class Board:
                         self.game_board[i][col] = colour
                         i += 1
 
-            if self.game_board[row][col - 1] == self.last_colour: #left
+            if self.game_board[row][col - 1] == self.last_colour:  # left
                 i = col
                 j = 0
                 while self.game_board[row][i - 1] == self.last_colour:
@@ -64,7 +64,7 @@ class Board:
                         self.game_board[row][i] = colour
                         i += 1
 
-            if self.game_board[row + 1][col] == self.last_colour: #down
+            if self.game_board[row + 1][col] == self.last_colour:  # down
                 i = row
                 j = 0
                 while self.game_board[i + 1][col] == self.last_colour:
@@ -75,7 +75,7 @@ class Board:
                         self.game_board[i][col] = colour
                         i -= 1
 
-            if self.game_board[row][col + 1] == self.last_colour: #right
+            if self.game_board[row][col + 1] == self.last_colour:  # right
                 i = col
                 j = 0
                 while self.game_board[row][i + 1] == self.last_colour:
@@ -86,7 +86,7 @@ class Board:
                         self.game_board[row][i] = colour
                         i -= 1
 
-            if self.game_board[row + 1][col + 1] == self.last_colour: #down & right
+            if self.game_board[row + 1][col + 1] == self.last_colour:  # down & right
                 i = row
                 k = col
                 j = 0
@@ -100,7 +100,7 @@ class Board:
                         i -= 1
                         k -= 1
 
-            if self.game_board[row + 1][col - 1] == self.last_colour: #down & left
+            if self.game_board[row + 1][col - 1] == self.last_colour:  # down & left
                 i = row
                 k = col
                 j = 0
@@ -114,7 +114,7 @@ class Board:
                         i -= 1
                         k += 1
 
-            if self.game_board[row - 1][col + 1] == self.last_colour: #up & right
+            if self.game_board[row - 1][col + 1] == self.last_colour:  # up & right
                 i = row
                 k = col
                 j = 0
@@ -128,7 +128,7 @@ class Board:
                         i += 1
                         k -= 1
 
-            if self.game_board[row - 1][col - 1] == self.last_colour: #up & left
+            if self.game_board[row - 1][col - 1] == self.last_colour:  # up & left
                 i = row
                 k = col
                 j = 0
@@ -142,19 +142,20 @@ class Board:
                         i += 1
                         k += 1
 
+        # after all the other squares are done change the last one and exit
         self.game_board[row][col] = colour
         self.last_move = Move.Move(row, col, colour)
         self.last_colour = colour
         return
 
-    def valid_move(self, row: int, col: int):
+    def valid_move(self, row: int, col: int): # this method is the one that checks if the moves are correct
         i: int = row
         j: int = col
         score: int = 0
         try:
             if (row < 0) or (col < 0) or (row > 7) or (col > 7) or self.game_board[row][col] != self.EMPTY:
                 return 0
-            if self.game_board[row - 1][col] == self.last_colour: #up
+            if self.game_board[row - 1][col] == self.last_colour:  # up
                 i = row
                 j = col
                 score = 0
@@ -163,7 +164,7 @@ class Board:
                     i -= 1
                 if self.game_board[i - 1][j] == self.last_colour * -1:
                     return score
-            if self.game_board[row][col - 1] == self.last_colour: #left
+            if self.game_board[row][col - 1] == self.last_colour:  # left
                 i = row
                 j = col
                 score = 0
@@ -172,7 +173,7 @@ class Board:
                     j -= 1
                 if self.game_board[i][j - 1] == self.last_colour * -1:
                     return score
-            if self.game_board[row + 1][col] == self.last_colour: #down
+            if self.game_board[row + 1][col] == self.last_colour:  # down
                 i = row
                 j = col
                 score = 0
@@ -181,7 +182,7 @@ class Board:
                     i += 1
                 if self.game_board[i + 1][j] == self.last_colour * -1:
                     return score
-            if self.game_board[row][col + 1] == self.last_colour: #right
+            if self.game_board[row][col + 1] == self.last_colour:  # right
                 i = row
                 j = col
                 score = 0
@@ -190,7 +191,7 @@ class Board:
                     j += 1
                 if self.game_board[i][j + 1] == self.last_colour * -1:
                     return score
-            if self.game_board[row + 1][col + 1] == self.last_colour: #down & right
+            if self.game_board[row + 1][col + 1] == self.last_colour:  # down & right
                 i = row
                 j = col
                 score = 0
@@ -200,7 +201,7 @@ class Board:
                     j += 1
                 if self.game_board[i + 1][j + 1] == self.last_colour * -1:
                     return score
-            if self.game_board[row + 1][col - 1] == self.last_colour: #down & left
+            if self.game_board[row + 1][col - 1] == self.last_colour:  # down & left
                 i = row
                 j = col
                 score = 0
@@ -210,7 +211,7 @@ class Board:
                     j -= 1
                 if self.game_board[i + 1][j - 1] == self.last_colour * -1:
                     return score
-            if self.game_board[row - 1][col + 1] == self.last_colour: #up & right
+            if self.game_board[row - 1][col + 1] == self.last_colour:  # up & right
                 i = row
                 j = col
                 score = 0
@@ -220,7 +221,7 @@ class Board:
                     j += 1
                 if self.game_board[i - 1][j + 1] == self.last_colour * -1:
                     return score
-            if self.game_board[row - 1][col - 1] == self.last_colour: #up & left
+            if self.game_board[row - 1][col - 1] == self.last_colour:  # up & left
                 i = row
                 j = col
                 score = 0
@@ -276,22 +277,3 @@ class Board:
                     print("-", end=" ")
             print()
         return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
