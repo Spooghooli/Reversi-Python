@@ -28,7 +28,7 @@ class GamePlayer:
         children = board.get_children(1)
         max_move = Move.Move(-1000)
         max_score = board.victor()
-        #temp_board = Board.Board()
+        # temp_board = Board.Board()
         for child in children:
             move = self.g_min(child, depth+1)
             temp_board = copy.deepcopy(child)
@@ -54,7 +54,7 @@ class GamePlayer:
         children = board.get_children(-1)
         min_move = Move.Move(1000)
         min_score = board.victor()
-        #temp_board = Board.Board()
+        # temp_board = Board.Board()
         for child in children:
             move = self.g_max(child, depth+1)
             temp_board = copy.deepcopy(child)
