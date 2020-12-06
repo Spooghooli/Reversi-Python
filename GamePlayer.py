@@ -39,12 +39,12 @@ class GamePlayer:
                         max_move.set_row(child.get_last_move().get_row())
                         max_move.set_col(child.get_last_move().get_col())
                         max_move.set_val(move.get_val())
-                        max_score = board.victor()
+                        max_score = child.victor()
                 else:
                     max_move.set_row(child.get_last_move().get_row())
                     max_move.set_col(child.get_last_move().get_col())
                     max_move.set_val(move.get_val())
-                    max_score = board.victor()
+                    max_score = child.victor()
         return max_move
 
     def g_min(self, board, depth):
