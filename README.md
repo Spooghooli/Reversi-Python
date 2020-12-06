@@ -1,7 +1,7 @@
 # Reversi-Python
  A simple python reversi game using a mini-max algorithm
  
- Black always goes first, player can choose whether to go first.
+ Black always goes first, player can choose whether to go first
  
  No advanced GUI (yet?). Looks a bit like this:
  
